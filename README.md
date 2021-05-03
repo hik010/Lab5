@@ -10,3 +10,4 @@
 ## Part 2:
 
 [LINK TO MY PART 2 REPOSITORY](https://github.com/hik010/github-actions-for-ci.git)
+[LINK TO LATEST ISSUE](https://github.com/hik010/github-actions-for-ci/issues/7)

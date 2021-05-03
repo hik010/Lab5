@@ -48,18 +48,47 @@ form.addEventListener('submit',function(event) {
   document.querySelector('button[type="reset"]').disabled = false;
   document.querySelector('button[type="button"]').disabled = false;
 
+  //add voice options
+  var voice_select_element = document.querySelector('select');
+  var voice_options = [];
+  voice_options = synth.getVoices();
+
+  for (var i = 0; i < voice_options.length; i++) {
+    var option = document.createElement('option');
+    option.textContent = voice_options[i].name + '(' + voice_options[i].lang + ')';
+
+    if(voice_options[i].default) {
+      option.textContent += ' -- DEFAULT';
+    }
+
+    option.setAttribute('data-lang', voice_options[i].lang);
+    option.setAttribute('data-name', voice_options[i].name);
+    voice_select_element.appendChild(option);
+
+
+  }
+
+
 });
 
 document.querySelector('button[type="reset"]').addEventListener('click',function(event) {
   
   var c = document.getElementById("user-image");
   var ctx = c.getContext('2d');
-  ctx.clearRect(0,0,c.width,c.height)
+  ctx.clearRect(0,0,c.width,c.height);
   document.querySelector('button[type="reset"]').disabled = true;
   document.querySelector('button[type="button"]').disabled = true;
 
+})
 
 
+document.querySelector('button[type="button"]').addEventListener('click',function(event) {
+  
+  var c = document.getElementById("user-image");
+  var ctx = c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height)
+  document.querySelector('button[type="reset"]').disabled = true;
+  document.querySelector('button[type="button"]').disabled = true;
 
 })
 
