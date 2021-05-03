@@ -2,15 +2,59 @@
 
 const img = new Image(); // used to load image from <input> and draw to canvas
 
+
 // Fires whenever the img object loads a new image (such as with img.src =)
 img.addEventListener('load', () => {
-  // TODO
 
+  // Find and select canvas element and colors it black
+  console.log('Image loaded');
+  const c = document.getElementById("user-image");
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0,0,c.width,c.height)
+  var dim = getDimmensions(c.width,c.height,img.naturalWidth,img.naturalHeight);
+  ctx.drawImage(img, dim['startX'],dim['startY'],dim['width'],dim['height']);
   // Some helpful tips:
   // - Fill the whole Canvas with black first to add borders on non-square images, then draw on top
   // - Clear the form when a new image is selected
   // - If you draw the image to canvas here, it will update as soon as a new image is selected
 });
+
+//Loading Image
+const fileInput =  document.getElementById('image-input');
+fileInput.onchange = () => {
+  const file = fileInput.files[0];
+  img.src = URL.createObjectURL(file);
+  img.alt = 'fileName'
+}
+
+//Loading Top and Bottom Text and Drawing
+// alert(document.querySelector('form'));
+var form = document.querySelector('form');
+form.addEventListener('submit',function(event) {
+
+    //gets the top and bottom text
+    alert('submitted');
+    event.preventDefault();
+    var top = document.getElementById("text-top").value;
+    var bottom = document.getElementById("text-bottom").value;
+    //draws text on image
+    var c = document.getElementById("user-image");
+    var ctx = c.getContext('2d');
+    ctx.font="50px Verdana";
+    ctx.fillStyle = "red";
+    ctx.fillText(top,c.width/2,0);
+    ctx.fillText(bottom,c.width/2,c.height);
+    //enable clear and reset 
+
+
+});
+
+// const 
+// const 
+
+
+
 
 /**
  * Takes in the dimensions of the canvas and the new image, then calculates the new
@@ -50,4 +94,18 @@ function getDimmensions(canvasWidth, canvasHeight, imageWidth, imageHeight) {
   }
 
   return { 'width': width, 'height': height, 'startX': startX, 'startY': startY }
+}
+
+function logSubmit(event) {
+  //gets the top and bottom text
+  var top = document.getElementById("text-top").value
+  var bottom = document.getElementById("text-bottom").value
+  //draws text on image
+  var c = document.getElementById("user-image");
+  var ctx = c.getContext('2d');
+  ctx.textAlign = 'center'
+  ctx.strokeText(top,c.width/2,0)
+  ctx.strokeText(bottom,c.width/2,c.height)
+  //enable clear and reset 
+
 }
