@@ -33,22 +33,35 @@ fileInput.onchange = () => {
 var form = document.querySelector('form');
 form.addEventListener('submit',function(event) {
 
-    //gets the top and bottom text
-    alert('submitted');
-    event.preventDefault();
-    var top = document.getElementById("text-top").value;
-    var bottom = document.getElementById("text-bottom").value;
-    //draws text on image
-    var c = document.getElementById("user-image");
-    var ctx = c.getContext('2d');
-    ctx.font="50px Verdana";
-    ctx.fillStyle = "red";
-    ctx.fillText(top,c.width/2,0);
-    ctx.fillText(bottom,c.width/2,c.height);
-    //enable clear and reset 
-
+  //gets the top and bottom text
+  event.preventDefault();
+  var top = document.getElementById("text-top").value;
+  var bottom = document.getElementById("text-bottom").value;
+  //draws text on image
+  var c = document.getElementById("user-image");
+  var ctx = c.getContext('2d');
+  ctx.font="30px Verdana";
+  // ctx.fillStyle = "red";
+  ctx.strokeText(top,c.width/2-15,30);
+  ctx.strokeText(bottom,c.width/2-15,c.height-20);
+  //enable clear and read text button 
+  document.querySelector('button[type="reset"]').disabled = false;
+  document.querySelector('button[type="button"]').disabled = false;
 
 });
+
+document.querySelector('button[type="reset"]').addEventListener('click',function(event) {
+  
+  var c = document.getElementById("user-image");
+  var ctx = c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height)
+  document.querySelector('button[type="reset"]').disabled = true;
+  document.querySelector('button[type="button"]').disabled = true;
+
+
+
+
+})
 
 // const 
 // const 
